@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <style>
+        #top {
+            border: 5px solid black;
+            height: calc(50vh - 10px);
+            width: calc(100% - 10px);
+            margin-left: 0px;
+            margin-right: 0px
+        }
+        
+        #bottom {
+            height: calc(50vh - 5px);
+            margin-left: 0px;
+            margin-right: 0px;
+            width: calc(100% - 10px);
+        }
+        
+        #bottom .left {
+            height: 100%;
+            width: calc(50% - 5px);
+            solid black;
+            margin-right: 5px;
+            border: 5px solid black;
+            float: left
+        }
+        
+        #bottom .right {
+            height: 100%;
+            width: calc(50% - 5px);
+            margin-left: 5px;
+            solid black;
+            border: 5px solid black;
+            float: left
+        }
+        
+        #control {
+            width: 1px;
+            height: 1px;
+            border: 9px solid black;
+            margin-left: calc(50% - 10px);
+            top: 0px !important
+        }
+        
+        #mid {
+            height: 10px;
+            margin-left: 0px;
+            margin-right: 0px;
+            width: calc(100% - 10px);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="row" id="top">
+		<img src="img/xquang.jpg" style="height: inherit; margin: auto; display: block;" />
+    </div>
+
+    <div class="row" id="mid">
+        <div id="control"></div>
+    </div>
+
+    <div class="row" id="bottom">
+        <div class="left">
+			<img src="img/xquang.jpg" style="width: inherit; height: inherit ; margin: auto; display: block;" />
+        </div>
+
+        <div class="right">
+			<img src="img/xquang.jpg" style="width: inherit; height: inherit ; margin: auto; display: block;" />
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <script>
+        $(document).mousemove(function(event) {
+            //console.log(event.pageX + ", " + event.pageY);
+            //$("span").text(event.pageX + ", " + event.pageY);
+        });
+
+        $("#control").draggable({
+
+            drag: function(event, ui) {
+                let width = $(document).width()
+                let height = $(document).height()
+
+                let heightTop = (event.pageY / height).toFixed(2)
+                let heightTopCss = parseFloat(heightTop) * 100
+                let heightBottomCss = parseFloat((1 - heightTop)) * 100
+
+                let widthBottomLeft = (event.pageX / width).toFixed(2)
+                let widthBottomLeftCss = parseFloat(widthBottomLeft) * 100
+                let widthBottomRightCss = 100 - widthBottomLeftCss
+
+                console.log(heightTopCss);
+
+                $('#top').css("height", "calc(" + heightTopCss + "vh - " + "5px" + ")")
+                $('#bottom').css("height", "calc(" + heightBottomCss + "vh - " + "10px" + ")")
+                $('#bottom .left').css("width", "calc(" + widthBottomLeftCss + "% - " + "5px" + ")")
+                $('#bottom .right').css("width", "calc(" + widthBottomRightCss + "% - " + "5px" + ")")
+
+                //console.log(event.pageX + ", " + event.pageY);
+            }
+        });
+    </script>
+
+</body>
+
+</html>
